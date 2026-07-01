@@ -14,21 +14,21 @@
   overflow: hidden;
 }
 
-/* Hero photo (right column of hero) — large, fading softly into white */
+/* Hero photo (right column of hero) — large, fading softly into white on the left */
 .hero-photo {
   aspect-ratio: 3 / 4;
   min-height: 560px;
   border-radius: 0;
-  /* Fade the image outward into the white background on every edge */
-  -webkit-mask-image: radial-gradient(
-    125% 105% at 55% 40%,
-    #000 52%,
-    transparent 100%
+  /* Fade the left edge of the image gradually into the white background */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 20%
   );
-  mask-image: radial-gradient(
-    125% 105% at 55% 40%,
-    #000 52%,
-    transparent 100%
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 20%
   );
 }
 
@@ -171,6 +171,42 @@ body.rdw-editing .edit-photo:hover {
 
 body.rdw-editing .edit-photo .edit-photo-hint {
   display: inline-block;
+}
+
+/* "Choose / replace photo" button, top-right of each slot */
+.edit-photo-replace {
+  display: none;
+}
+
+body.rdw-editing .edit-photo .edit-photo-replace {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 3px;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+}
+
+body.rdw-editing .edit-photo .edit-photo-replace:hover {
+  background: #333;
+}
+
+/* Dragging to reposition a filled photo */
+body.rdw-editing .edit-photo:not(.is-empty) {
+  cursor: grab;
+}
+
+body.rdw-editing .edit-photo.rdw-dragging {
+  cursor: grabbing;
+  outline-color: #111;
 }
 
 /* Editable links */

@@ -17,17 +17,21 @@
   var CONTENT_URL = "/data/content.json";
   var MAX_DIM = 1600; // px — uploaded photos are downscaled to this
 
-  var base = { images: {}, links: {} };
-  var content = { images: {}, links: {} };
+  var base = { images: {}, links: {}, positions: {} };
+  var content = { images: {}, links: {}, positions: {} };
 
   /* ---------- storage helpers ---------- */
 
   function readOverrides() {
     try {
       var o = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-      return { images: o.images || {}, links: o.links || {} };
+      return {
+        images: o.images || {},
+        links: o.links || {},
+        positions: o.positions || {},
+      };
     } catch (e) {
-      return { images: {}, links: {} };
+      return { images: {}, links: {}, positions: {} };
     }
   }
 
@@ -47,6 +51,7 @@
     content = {
       images: Object.assign({}, base.images, o.images),
       links: Object.assign({}, base.links, o.links),
+      positions: Object.assign({}, base.positions, o.positions),
     };
   }
 
@@ -63,11 +68,28 @@
         el.style.backgroundImage = "";
         el.classList.add("is-empty");
       }
+      var pos = content.positions[key];
+      if (pos) el.style.backgroundPosition = pos;
     });
     document.querySelectorAll("[data-edit-link]").forEach(function (el) {
       var key = el.getAttribute("data-edit-link");
       var url = content.links[key];
       if (url) el.setAttribute("href", url);
+    });
+    if (document.body.classList.contains("rdw-editing")) updateEditHints();
+  }
+
+  function updateEditHints() {
+    document.querySelectorAll("[data-edit-img]").forEach(function (el) {
+      var empty = el.classList.contains("is-empty");
+      var hint = el.querySelector(".edit-photo-hint");
+      var btn = el.querySelector(".edit-photo-replace");
+      if (hint) {
+        hint.textContent = empty
+          ? "Klik om een foto te uploaden"
+          : "Sleep om de foto te positioneren";
+      }
+      if (btn) btn.textContent = empty ? "Foto kiezen" : "Vervang foto";
     });
   }
 
@@ -121,6 +143,13 @@
     applyContent();
   }
 
+  function savePosition(key, pos) {
+    var o = readOverrides();
+    o.positions[key] = pos;
+    writeOverrides(o);
+    merge();
+  }
+
   function buildFileInput() {
     var input = document.createElement("input");
     input.type = "file";
@@ -146,17 +175,66 @@
       fileInput.value = "";
     });
 
-    // Photo slots -> click to upload
+    // Photo slots -> click to upload (empty) or drag to reposition (filled)
     document.querySelectorAll("[data-edit-img]").forEach(function (el) {
+      var key = el.getAttribute("data-edit-img");
+
       var hint = document.createElement("span");
       hint.className = "edit-photo-hint";
-      hint.textContent = "Foto uploaden / vervangen";
       el.appendChild(hint);
-      el.addEventListener("click", function () {
-        activeKey = el.getAttribute("data-edit-img");
+
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "edit-photo-replace";
+      el.appendChild(btn);
+
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        activeKey = key;
         fileInput.click();
       });
+
+      // Empty slot: click anywhere to upload
+      el.addEventListener("click", function () {
+        if (el.classList.contains("is-empty")) {
+          activeKey = key;
+          fileInput.click();
+        }
+      });
+
+      // Filled slot: drag to set the focal point (background-position)
+      var dragging = false;
+      function updatePos(e) {
+        var r = el.getBoundingClientRect();
+        var x = ((e.clientX - r.left) / r.width) * 100;
+        var y = ((e.clientY - r.top) / r.height) * 100;
+        x = Math.max(0, Math.min(100, x));
+        y = Math.max(0, Math.min(100, y));
+        el.style.backgroundPosition = x.toFixed(1) + "% " + y.toFixed(1) + "%";
+      }
+      el.addEventListener("pointerdown", function (e) {
+        if (el.classList.contains("is-empty") || e.target === btn) return;
+        dragging = true;
+        try {
+          el.setPointerCapture(e.pointerId);
+        } catch (err) {}
+        el.classList.add("rdw-dragging");
+        updatePos(e);
+      });
+      el.addEventListener("pointermove", function (e) {
+        if (dragging) updatePos(e);
+      });
+      function endDrag() {
+        if (!dragging) return;
+        dragging = false;
+        el.classList.remove("rdw-dragging");
+        savePosition(key, el.style.backgroundPosition || "50% 50%");
+      }
+      el.addEventListener("pointerup", endDrag);
+      el.addEventListener("pointercancel", endDrag);
     });
+
+    updateEditHints();
 
     // Editable links -> click to change URL
     document.querySelectorAll("[data-edit-link]").forEach(function (el) {
