@@ -1,0 +1,188 @@
+/* ============================================================
+   Photo slots + edit-mode styling
+   Loaded after style.css on every page.
+   ============================================================ */
+
+/* ---------- Editable photo slots ---------- */
+
+.edit-photo {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Hero photo (right column of hero) */
+.hero-photo {
+  aspect-ratio: 4 / 5;
+  min-height: 320px;
+}
+
+/* Portrait on the About page */
+.about-photo {
+  aspect-ratio: 4 / 5;
+}
+
+/* Photo at the top of a service / expertise card */
+.card-photo {
+  aspect-ratio: 16 / 10;
+  margin: -34px -30px 22px;
+  border-radius: 4px 4px 0 0;
+}
+
+/* Blog thumbnail */
+.post-thumb.edit-photo {
+  border-radius: 0;
+}
+
+/* Empty slots are hidden from normal visitors ... */
+.edit-photo.is-empty {
+  display: none;
+}
+
+/* ... and layouts gracefully collapse when a photo is absent */
+body:not(.rdw-editing) .hero-grid:has(> .edit-photo.is-empty) {
+  grid-template-columns: 1fr;
+}
+body:not(.rdw-editing) .split:has(> .edit-photo.is-empty) {
+  grid-template-columns: 1fr;
+}
+
+/* ---------- Hero two-column layout ---------- */
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 56px;
+  align-items: center;
+}
+
+@media (max-width: 860px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+/* ============================================================
+   EDIT MODE
+   ============================================================ */
+
+body.rdw-editing {
+  padding-bottom: 90px; /* room for the toolbar */
+}
+
+/* Show empty slots while editing so they can be filled */
+body.rdw-editing .edit-photo.is-empty {
+  display: flex;
+}
+
+body.rdw-editing .edit-photo {
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  outline: 2px dashed rgba(17, 17, 17, 0.35);
+  outline-offset: -8px;
+  min-height: 180px;
+  background-color: #f0efec;
+}
+
+body.rdw-editing .card-photo.is-empty {
+  min-height: 140px;
+}
+
+body.rdw-editing .edit-photo:hover {
+  outline-color: #111;
+}
+
+.edit-photo-hint {
+  display: none;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #111;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 14px;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+body.rdw-editing .edit-photo .edit-photo-hint {
+  display: inline-block;
+}
+
+/* Editable links */
+body.rdw-editing .rdw-editable-link {
+  outline: 1px dashed rgba(17, 17, 17, 0.4);
+  outline-offset: 3px;
+  cursor: text;
+  position: relative;
+}
+
+body.rdw-editing .rdw-editable-link::after {
+  content: "✎";
+  margin-left: 6px;
+  font-size: 0.85em;
+  opacity: 0.6;
+}
+
+/* Toolbar */
+.rdw-toolbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #111;
+  color: #fff;
+  padding: 14px 24px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.25);
+}
+
+.rdw-toolbar-title {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.rdw-toolbar-hint {
+  color: rgba(255, 255, 255, 0.6);
+  flex: 1;
+  min-width: 200px;
+}
+
+.rdw-toolbar button {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.rdw-toolbar button[data-act="download"] {
+  background: #fff;
+  color: #111;
+}
+
+.rdw-toolbar button:hover {
+  background: #fff;
+  color: #111;
+}
+
+@media (max-width: 680px) {
+  .rdw-toolbar-hint {
+    display: none;
+  }
+}

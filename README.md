@@ -57,6 +57,31 @@ Then open http://localhost:3000.
 
 `vercel.json` enables clean URLs so links like `/about` resolve to `about.html`.
 
+## Edit mode — adding photos & changing links yourself
+
+The site has a built-in, no-code **edit mode** for the photo spots (hero, the three
+expertise cards, the About portrait, and the blog thumbnails) and for the
+"Links to my work" links (Wikipedia, Google Scholar, LinkedIn, Academy of Europe).
+
+**How to use it:**
+
+1. Open any page with `?edit=1` in the URL, e.g. `https://your-site.vercel.app/?edit=1`
+   (locally: `http://localhost:3000/?edit=1`). A black toolbar appears at the bottom.
+2. **Add a photo** — click any highlighted photo spot, choose an image, and it appears
+   instantly. Photos are automatically downscaled so the file stays small.
+3. **Change a link** — click a "Links to my work" link and enter the new URL.
+4. Your changes are saved in your browser so you can preview them across pages.
+5. Click **content.json downloaden** in the toolbar to download the updated content.
+6. Replace `data/content.json` in the repository with the downloaded file, then commit
+   and push. Vercel redeploys automatically and the photos/links go live for everyone.
+7. **Wijzigingen wissen** resets local changes; **Sluiten** exits edit mode.
+
+Empty photo spots are hidden from normal visitors — they only show up once a photo has
+been added (or while you are in edit mode).
+
+> The content lives in `data/content.json`. Uploaded photos are stored inline (as
+> base64 data URLs), so the single file is all you need to commit.
+
 ## Things you may want to update
 
 - **Links to my work** — the Wikipedia, Google Scholar, LinkedIn and Academy of

@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/edit.css" />
 </head>
 <body>
 
@@ -59,7 +60,7 @@
           </ul>
           <a href="/contact" class="btn btn-primary">Get in contact <span class="arrow">&rarr;</span></a>
         </div>
-        <div class="media">Ronald de Wit</div>
+        <div class="edit-photo about-photo is-empty" data-edit-img="about-portrait" title="Portrait photo"></div>
       </div>
     </section>
 
@@ -67,10 +68,10 @@
       <div class="container">
         <p class="eyebrow">Links to my work</p>
         <div class="work-links">
-          <a class="work-link" href="https://en.wikipedia.org/wiki/Ronald_de_Wit" target="_blank" rel="noopener">Wikipedia</a>
-          <a class="work-link" href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a>
-          <a class="work-link" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="work-link" href="https://www.ae-info.org/" target="_blank" rel="noopener">Academy of Europe</a>
+          <a class="work-link" data-edit-link="wikipedia" href="https://en.wikipedia.org/wiki/Ronald_de_Wit" target="_blank" rel="noopener">Wikipedia</a>
+          <a class="work-link" data-edit-link="scholar" href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a>
+          <a class="work-link" data-edit-link="linkedin" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="work-link" data-edit-link="academy" href="https://www.ae-info.org/" target="_blank" rel="noopener">Academy of Europe</a>
         </div>
       </div>
     </section>
@@ -90,5 +91,6 @@
   </footer>
 
   <script src="/js/main.js"></script>
+  <script src="/js/content.js"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/edit.css" />
 </head>
 <body>
 
@@ -33,24 +34,27 @@
   <main>
     <!-- Hero -->
     <section class="hero">
-      <div class="container">
-        <p class="eyebrow">Internist &amp; Medical Oncologist</p>
-        <h1>Consultant with a lifetime of experience.</h1>
-        <p class="lead">
-          Internist and medical oncologist affiliated with the Erasmus University
-          Medical Center for over 30 years, and Full Professor in Uro-Genital
-          Oncology for the past 15 years. Available for consulting, advisory and
-          committee work in clinical oncology.
-        </p>
-        <a href="/contact" class="btn btn-primary">Contact <span class="arrow">&rarr;</span></a>
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Internist &amp; Medical Oncologist</p>
+          <h1>Consultant with a lifetime of experience.</h1>
+          <p class="lead">
+            Internist and medical oncologist affiliated with the Erasmus University
+            Medical Center for over 30 years, and Full Professor in Uro-Genital
+            Oncology for the past 15 years. Available for consulting, advisory and
+            committee work in clinical oncology.
+          </p>
+          <a href="/contact" class="btn btn-primary">Contact <span class="arrow">&rarr;</span></a>
 
-        <p class="eyebrow" style="margin-top:3.2rem;">Links to my work</p>
-        <div class="work-links">
-          <a class="work-link" href="https://en.wikipedia.org/wiki/Ronald_de_Wit" target="_blank" rel="noopener">Wikipedia</a>
-          <a class="work-link" href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a>
-          <a class="work-link" href="https://www.ae-info.org/" target="_blank" rel="noopener">Academy of Europe</a>
-          <a class="work-link" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          <p class="eyebrow" style="margin-top:3.2rem;">Links to my work</p>
+          <div class="work-links">
+            <a class="work-link" data-edit-link="wikipedia" href="https://en.wikipedia.org/wiki/Ronald_de_Wit" target="_blank" rel="noopener">Wikipedia</a>
+            <a class="work-link" data-edit-link="scholar" href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a>
+            <a class="work-link" data-edit-link="academy" href="https://www.ae-info.org/" target="_blank" rel="noopener">Academy of Europe</a>
+            <a class="work-link" data-edit-link="linkedin" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
         </div>
+        <div class="edit-photo hero-photo is-empty" data-edit-img="hero" title="Hero photo"></div>
       </div>
     </section>
 
@@ -61,16 +65,19 @@
         <h2 style="margin-bottom:2.6rem;">Expertise across clinical oncology.</h2>
         <div class="grid grid-3">
           <article class="card">
+            <div class="edit-photo card-photo is-empty" data-edit-img="service-consulting" title="Consulting photo"></div>
             <span class="num">01</span>
             <h3>Consulting &amp; Advisory</h3>
             <p>30+ years of experience in clinical cancer trial design and conduct, across genitourinary, gynecological and other solid malignancies.</p>
           </article>
           <article class="card">
+            <div class="edit-photo card-photo is-empty" data-edit-img="service-dmc" title="Data Monitoring photo"></div>
             <span class="num">02</span>
             <h3>Data Monitoring Committees</h3>
             <p>Extensive 20-year track record chairing and serving on Data &amp; Safety Monitoring Committees for industry studies in a broad variety of solid cancers.</p>
           </article>
           <article class="card">
+            <div class="edit-photo card-photo is-empty" data-edit-img="service-boards" title="Supervisory Boards photo"></div>
             <span class="num">03</span>
             <h3>Supervisory Boards</h3>
             <p>Leadership experience as department chief and medical-ethics board chair; founder and current chairman of the Dutch Uro-Oncology Study Group.</p>
@@ -105,5 +112,6 @@
   </footer>
 
   <script src="/js/main.js"></script>
+  <script src="/js/content.js"></script>
 </body>
 </html>

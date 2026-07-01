@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/edit.css" />
 </head>
 <body>
 
@@ -82,9 +83,9 @@
     const excerpt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.";
     const date = "August 14, 2024";
     const wrap = document.getElementById("posts");
-    wrap.innerHTML = posts.map(title => `
+    wrap.innerHTML = posts.map((title, i) => `
       <article class="post-card">
-        <div class="post-thumb"></div>
+        <div class="post-thumb edit-photo is-empty" data-edit-img="post-${i + 1}" title="Article photo"></div>
         <div class="post-body">
           <p class="post-date">${date}</p>
           <h3>${title}</h3>
@@ -94,5 +95,6 @@
       </article>`).join("");
   </script>
   <script src="/js/main.js"></script>
+  <script src="/js/content.js"></script>
 </body>
 </html>
