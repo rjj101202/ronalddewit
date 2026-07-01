@@ -19,16 +19,25 @@
   aspect-ratio: 3 / 4;
   min-height: 560px;
   border-radius: 0;
-  /* Fade the left edge of the image gradually into the white background */
+  /* Fade the left edge of the image gradually into the white background.
+     Multiple eased stops so the photo truly dissolves — no visible edge. */
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
-    #000 20%
+    rgba(0, 0, 0, 0.08) 7%,
+    rgba(0, 0, 0, 0.3) 14%,
+    rgba(0, 0, 0, 0.62) 22%,
+    rgba(0, 0, 0, 0.88) 30%,
+    #000 40%
   );
   mask-image: linear-gradient(
     to right,
     transparent 0%,
-    #000 20%
+    rgba(0, 0, 0, 0.08) 7%,
+    rgba(0, 0, 0, 0.3) 14%,
+    rgba(0, 0, 0, 0.62) 22%,
+    rgba(0, 0, 0, 0.88) 30%,
+    #000 40%
   );
 }
 
