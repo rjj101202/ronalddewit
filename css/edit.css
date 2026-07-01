@@ -17,7 +17,7 @@
 /* Hero photo (right column of hero) — large, fading softly into white on the left */
 .hero-photo {
   aspect-ratio: 3 / 4;
-  min-height: 560px;
+  min-height: 680px;
   border-radius: 0;
   /* Fade the left edge of the image gradually into the white background.
      Multiple eased stops so the photo truly dissolves — no visible edge. */
@@ -91,7 +91,7 @@ body:not(.rdw-editing) .split:has(> .edit-photo.is-empty) {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.85fr 1.3fr;
   gap: 56px;
   align-items: center;
 }
