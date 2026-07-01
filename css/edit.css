@@ -84,6 +84,42 @@ body:not(.rdw-editing) .split:has(> .edit-photo.is-empty) {
   }
 }
 
+/* ---------- Leaf fish & reef section (contact) ---------- */
+
+.reef {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.reef-photo {
+  aspect-ratio: 3 / 2;
+  margin: 0 0 32px;
+  border-radius: 4px;
+}
+
+.reef-quote {
+  margin: 0;
+}
+
+.reef-quote p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+  line-height: 1.4;
+  color: var(--black);
+  margin-bottom: 1.2rem;
+}
+
+.reef-quote cite {
+  font-family: var(--font-sans);
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--light-grey);
+}
+
 /* ============================================================
    EDIT MODE
    ============================================================ */
