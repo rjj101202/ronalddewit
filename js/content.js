@@ -277,11 +277,20 @@
       });
     });
 
+    // Don't submit forms while editing (e.g. clicking the editable submit button)
+    document.querySelectorAll("form").forEach(function (f) {
+      f.addEventListener("submit", function (e) {
+        e.preventDefault();
+      });
+    });
+
     // Editable text -> click to type
     document.querySelectorAll("[data-edit-text]").forEach(function (el) {
       el.setAttribute("contenteditable", "true");
       el.classList.add("rdw-editable-text");
       el.setAttribute("spellcheck", "false");
+      // A <label for=..> would steal the click to focus its input; drop it while editing
+      if (el.tagName === "LABEL") el.removeAttribute("for");
       el.addEventListener("blur", function () {
         saveText(el.getAttribute("data-edit-text"), el.textContent.trim());
       });
