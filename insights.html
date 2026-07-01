@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insights — Ronald de Wit Consulting</title>
+  <meta name="description" content="Insights and articles from Ronald de Wit Consulting." />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="/" class="brand" aria-label="Ronald de Wit — home">
+        <img src="/assets/logo.svg" width="34" height="34" alt="" />
+        <span>Ronald de Wit</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="/services">Services</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/insights">Insights</a></li>
+        <li><a href="/contact" class="cta">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="container">
+        <p class="eyebrow">Insights</p>
+        <h1>Insights &amp; articles.</h1>
+        <p class="lead">Business insights and articles written by our team of world-class professionals.</p>
+      </div>
+    </section>
+
+    <section style="padding-top:20px;">
+      <div class="container">
+        <div class="grid grid-3" id="posts"></div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container">
+        <h2>Ready to take your business to the next level?</h2>
+        <p>Get in touch today and receive a complimentary consultation.</p>
+        <a href="/contact" class="btn btn-primary">Request a consultation <span class="arrow">&rarr;</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a href="/" class="brand"><img src="/assets/logo.svg" width="28" height="28" alt="" /><span>Ronald de Wit</span></a>
+      <ul class="footer-links">
+        <li><a href="/services">Services</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/insights">Insights</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+      <p class="footer-copy">Ronald de Wit Consulting — All Rights Reserved &copy;</p>
+    </div>
+  </footer>
+
+  <script>
+    // Article list — placeholder content, edit or replace as needed.
+    const posts = [
+      "Step by Step Guide to Crafting the Perfect Pitch Deck",
+      "Recruiting New Employees In A Remote Work Environment",
+      "How to Choose an ERP Software for Your Company",
+      "10 Digital Marketing Tips You Need To Know",
+      "The Importance of Performing Market Research",
+      "Is Your Digital Security As Strong As It Should Be?",
+      "Proven Methods For Managing A Remote Team",
+      "How to Prepare a Business Plan from Scratch",
+      "From Startup to Scale-Up: How to Manage Growth"
+    ];
+    const excerpt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.";
+    const date = "August 14, 2024";
+    const wrap = document.getElementById("posts");
+    wrap.innerHTML = posts.map(title => `
+      <article class="post-card">
+        <div class="post-thumb"></div>
+        <div class="post-body">
+          <p class="post-date">${date}</p>
+          <h3>${title}</h3>
+          <p>${excerpt}</p>
+          <a class="read-more" href="#">Read more &rarr;</a>
+        </div>
+      </article>`).join("");
+  </script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
