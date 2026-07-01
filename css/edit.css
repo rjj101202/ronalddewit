@@ -14,10 +14,28 @@
   overflow: hidden;
 }
 
-/* Hero photo (right column of hero) */
+/* Hero photo (right column of hero) — large, fading softly into white */
 .hero-photo {
-  aspect-ratio: 4 / 5;
-  min-height: 320px;
+  aspect-ratio: 3 / 4;
+  min-height: 560px;
+  border-radius: 0;
+  /* Fade the image outward into the white background on every edge */
+  -webkit-mask-image: radial-gradient(
+    125% 105% at 55% 40%,
+    #000 52%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    125% 105% at 55% 40%,
+    #000 52%,
+    transparent 100%
+  );
+}
+
+@media (max-width: 860px) {
+  .hero-photo {
+    min-height: 440px;
+  }
 }
 
 /* Portrait on the About page */
@@ -54,7 +72,7 @@ body:not(.rdw-editing) .split:has(> .edit-photo.is-empty) {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1fr 1fr;
   gap: 56px;
   align-items: center;
 }
@@ -77,6 +95,12 @@ body.rdw-editing {
 /* Show empty slots while editing so they can be filled */
 body.rdw-editing .edit-photo.is-empty {
   display: flex;
+}
+
+/* Show the full image (no fade) while editing so the upload target is clear */
+body.rdw-editing .hero-photo {
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 body.rdw-editing .edit-photo {
