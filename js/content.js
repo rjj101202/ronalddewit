@@ -17,8 +17,9 @@
   var CONTENT_URL = "/data/content.json";
   var MAX_DIM = 1600; // px — uploaded photos are downscaled to this
 
-  var base = { images: {}, links: {}, positions: {} };
-  var content = { images: {}, links: {}, positions: {} };
+  var base = { images: {}, links: {}, positions: {}, texts: {} };
+  var content = { images: {}, links: {}, positions: {}, texts: {} };
+  var textDefaults = {}; // original hard-coded text, for reset fallback
 
   /* ---------- storage helpers ---------- */
 
@@ -29,9 +30,10 @@
         images: o.images || {},
         links: o.links || {},
         positions: o.positions || {},
+        texts: o.texts || {},
       };
     } catch (e) {
-      return { images: {}, links: {}, positions: {} };
+      return { images: {}, links: {}, positions: {}, texts: {} };
     }
   }
 
@@ -52,7 +54,15 @@
       images: Object.assign({}, base.images, o.images),
       links: Object.assign({}, base.links, o.links),
       positions: Object.assign({}, base.positions, o.positions),
+      texts: Object.assign({}, base.texts, o.texts),
     };
+  }
+
+  function captureDefaults() {
+    document.querySelectorAll("[data-edit-text]").forEach(function (el) {
+      var key = el.getAttribute("data-edit-text");
+      if (!(key in textDefaults)) textDefaults[key] = el.textContent;
+    });
   }
 
   /* ---------- apply content to the page ---------- */
@@ -75,6 +85,13 @@
       var key = el.getAttribute("data-edit-link");
       var url = content.links[key];
       if (url) el.setAttribute("href", url);
+    });
+    document.querySelectorAll("[data-edit-text]").forEach(function (el) {
+      // don't overwrite the element the user is currently typing in
+      if (el === document.activeElement) return;
+      var key = el.getAttribute("data-edit-text");
+      var val = content.texts[key];
+      el.textContent = val != null ? val : textDefaults[key];
     });
     if (document.body.classList.contains("rdw-editing")) updateEditHints();
   }
@@ -146,6 +163,17 @@
   function savePosition(key, pos) {
     var o = readOverrides();
     o.positions[key] = pos;
+    writeOverrides(o);
+    merge();
+  }
+
+  function saveText(key, val) {
+    var o = readOverrides();
+    if (val === textDefaults[key]) {
+      delete o.texts[key]; // back to default -> no override needed
+    } else {
+      o.texts[key] = val;
+    }
     writeOverrides(o);
     merge();
   }
@@ -249,6 +277,24 @@
       });
     });
 
+    // Editable text -> click to type
+    document.querySelectorAll("[data-edit-text]").forEach(function (el) {
+      el.setAttribute("contenteditable", "true");
+      el.classList.add("rdw-editable-text");
+      el.setAttribute("spellcheck", "false");
+      el.addEventListener("blur", function () {
+        saveText(el.getAttribute("data-edit-text"), el.textContent.trim());
+      });
+      // Enter confirms on single-line elements (headings, labels)
+      el.addEventListener("keydown", function (e) {
+        var multi = el.tagName === "P" || el.tagName === "LI";
+        if (e.key === "Enter" && !multi && !e.shiftKey) {
+          e.preventDefault();
+          el.blur();
+        }
+      });
+    });
+
     buildToolbar();
   }
 
@@ -257,7 +303,7 @@
     bar.className = "rdw-toolbar";
     bar.innerHTML =
       '<span class="rdw-toolbar-title">Bewerkmodus</span>' +
-      '<span class="rdw-toolbar-hint">Klik op een fotoplek om te uploaden, of op een link om de URL te wijzigen.</span>' +
+      '<span class="rdw-toolbar-hint">Klik op tekst om te typen, op een fotoplek om te uploaden (sleep om te positioneren), of op een link om de URL te wijzigen.</span>' +
       '<button type="button" data-act="download">content.json downloaden</button>' +
       '<button type="button" data-act="reset">Wijzigingen wissen</button>' +
       '<button type="button" data-act="exit">Sluiten</button>';
@@ -320,7 +366,10 @@
         base = {
           images: (data && data.images) || {},
           links: (data && data.links) || {},
+          positions: (data && data.positions) || {},
+          texts: (data && data.texts) || {},
         };
+        captureDefaults();
         merge();
         applyContent();
         if (editActive()) enableEditMode();

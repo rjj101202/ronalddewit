@@ -243,6 +243,24 @@ body.rdw-editing .rdw-editable-link::after {
   opacity: 0.6;
 }
 
+/* Editable text */
+body.rdw-editing [data-edit-text] {
+  outline: 1px dashed rgba(17, 17, 17, 0.25);
+  outline-offset: 4px;
+  border-radius: 2px;
+  cursor: text;
+  transition: outline-color 0.15s ease, background 0.15s ease;
+}
+
+body.rdw-editing [data-edit-text]:hover {
+  outline-color: rgba(17, 17, 17, 0.55);
+}
+
+body.rdw-editing [data-edit-text]:focus {
+  outline: 2px solid #111;
+  background: rgba(255, 255, 255, 0.6);
+}
+
 /* Toolbar */
 .rdw-toolbar {
   position: fixed;

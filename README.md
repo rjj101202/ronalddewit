@@ -57,24 +57,28 @@ Then open http://localhost:3000.
 
 `vercel.json` enables clean URLs so links like `/about` resolve to `about.html`.
 
-## Edit mode — adding photos & changing links yourself
+## Edit mode — editing text, photos & links yourself
 
-The site has a built-in, no-code **edit mode** for the photo spots (hero, the three
-expertise cards, the About portrait, and the blog thumbnails) and for the
+The site has a built-in, no-code **edit mode** for the text (headings, intro paragraphs,
+expertise descriptions, the reef quote, contact details, etc.), the photo spots (hero,
+the three expertise cards, the About portrait, the reef photo) and the
 "Links to my work" links (Wikipedia, Google Scholar, LinkedIn, Academy of Europe).
 
 **How to use it:**
 
 1. Open any page with `?edit=1` in the URL, e.g. `https://your-site.vercel.app/?edit=1`
    (locally: `http://localhost:3000/?edit=1`). A black toolbar appears at the bottom.
-2. **Add a photo** — click any highlighted photo spot, choose an image, and it appears
-   instantly. Photos are automatically downscaled so the file stays small.
-3. **Change a link** — click a "Links to my work" link and enter the new URL.
-4. Your changes are saved in your browser so you can preview them across pages.
-5. Click **content.json downloaden** in the toolbar to download the updated content.
-6. Replace `data/content.json` in the repository with the downloaded file, then commit
+2. **Edit text** — click any heading or paragraph (they get a dashed outline) and type.
+   Press Enter to confirm a heading, or just click elsewhere.
+3. **Add a photo** — click any highlighted photo spot, choose an image, and it appears
+   instantly. Photos are automatically downscaled so the file stays small. Once a photo
+   is in place you can **drag it** to reposition/center it.
+4. **Change a link** — click a "Links to my work" link and enter the new URL.
+5. Your changes are saved in your browser so you can preview them across pages.
+6. Click **content.json downloaden** in the toolbar to download the updated content.
+7. Replace `data/content.json` in the repository with the downloaded file, then commit
    and push. Vercel redeploys automatically and the photos/links go live for everyone.
-7. **Wijzigingen wissen** resets local changes; **Sluiten** exits edit mode.
+8. **Wijzigingen wissen** resets local changes; **Sluiten** exits edit mode.
 
 Empty photo spots are hidden from normal visitors — they only show up once a photo has
 been added (or while you are in edit mode).
