@@ -16,8 +16,9 @@
 
 /* Hero photo (right column of hero) — large, fading softly into white on the left */
 .hero-photo {
-  aspect-ratio: 3 / 4;
-  min-height: 680px;
+  aspect-ratio: 16 / 11;
+  min-height: 400px;
+  max-height: 480px;
   border-radius: 0;
   /* Fade the left edge of the image gradually into the white background.
      Multiple eased stops so the photo truly dissolves — no visible edge. */
@@ -53,7 +54,8 @@
 
 @media (max-width: 860px) {
   .hero-photo {
-    min-height: 440px;
+    min-height: 300px;
+    max-height: none;
   }
 }
 
@@ -91,7 +93,7 @@ body:not(.rdw-editing) .split:has(> .edit-photo.is-empty) {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 0.85fr 1.3fr;
+  grid-template-columns: 1fr 1.15fr;
   gap: 56px;
   align-items: center;
 }
