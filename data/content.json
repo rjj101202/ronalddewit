@@ -1,9 +1,25 @@
 {
-  "images": {},
+  "images": {
+    "hero": "/assets/photos/hero.jpg",
+    "service-consulting": "/assets/photos/service-consulting.jpg",
+    "service-dmc": "/assets/photos/service-dmc.jpg",
+    "service-boards": "/assets/photos/service-boards.jpg",
+    "about-portrait": "/assets/photos/about-portrait.jpg"
+  },
   "links": {
-    "wikipedia": "https://en.wikipedia.org/wiki/Ronald_de_Wit",
-    "scholar": "https://scholar.google.com/",
-    "linkedin": "https://www.linkedin.com/",
-    "academy": "https://www.ae-info.org/"
+    "academy": "https://www.ae-info.org/ae/Member/De_Wit_Ronald",
+    "scholar": "https://scholar.google.com/citations?user=QQtXlH4AAAAJ&hl=nl",
+    "linkedin": "https://www.linkedin.com/in/ronald-de-wit-35078522/?originalSubdomain=nl",
+    "wikipedia": "https://en.wikipedia.org/wiki/Ronald_de_Wit"
+  },
+  "positions": {
+    "hero": "79.1% 59.7%",
+    "service-consulting": "40.1% 49.7%",
+    "service-dmc": "68.1% 30.6%",
+    "service-boards": "59.9% 57.4%"
+  },
+  "texts": {
+    "about-p1": "Over more than three decades I have been deeply involved in clinical cancer\n            trial design and conduct. Across germ-cell, urothelial, renal and prostate\n            cancers, as well as gynecological and breast cancer research.",
+    "about-role3": "Member of the Academia Europaea"
   }
 }
