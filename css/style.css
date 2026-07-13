@@ -308,6 +308,81 @@ section {
   font-size: 0.98rem;
 }
 
+/* ---------- Services (stacked, alternating) ---------- */
+
+.services-list {
+  overflow-x: clip; /* guard against the horizontal slide causing scroll */
+}
+
+.services-list .service-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: 72px 0;
+}
+
+.services-list .service-row + .service-row {
+  border-top: 1px solid var(--line);
+}
+
+.service-photo {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.service-media .num {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  color: var(--line);
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.service-media h3 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin: 0;
+}
+
+.service-body p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--grey);
+  margin: 0;
+}
+
+/* ---------- Reveal on scroll (enabled by JS) ---------- */
+
+.js-reveal .reveal {
+  opacity: 0;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
+}
+
+.js-reveal .reveal-from-left {
+  transform: translateX(-64px);
+}
+
+.js-reveal .reveal-from-right {
+  transform: translateX(64px);
+}
+
+.js-reveal .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .reveal {
+    transition: opacity 0.4s ease;
+    transform: none;
+  }
+}
+
 /* ---------- About split ---------- */
 
 .split {
@@ -533,6 +608,20 @@ section {
   }
   .split .media {
     aspect-ratio: 16 / 10;
+  }
+  .services-list .service-row {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 48px 0;
+  }
+  /* Always show photo + title above the text when stacked */
+  .service-media {
+    order: -1;
+  }
+  /* Vertical reveal on small screens (no horizontal slide) */
+  .js-reveal .reveal-from-left,
+  .js-reveal .reveal-from-right {
+    transform: translateY(32px);
   }
 }
 
