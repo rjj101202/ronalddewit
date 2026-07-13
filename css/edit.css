@@ -16,10 +16,14 @@
 
 /* Hero photo (right column of hero) — large, fading softly into white on the left */
 .hero-photo {
-  aspect-ratio: 16 / 11;
-  min-height: 400px;
-  max-height: 480px;
+  /* Grow to the full height of the text column beside it (text stays put) */
+  align-self: stretch;
+  min-height: 520px;
   border-radius: 0;
+  /* Bleed out to the right edge of the viewport so the photo reads as
+     emerging from behind the text, which keeps its exact position. */
+  margin-right: calc(50% - 50vw);
+  background-size: cover;
   /* Fade the left edge of the image gradually into the white background.
      Multiple eased stops so the photo truly dissolves — no visible edge. */
   -webkit-mask-image: linear-gradient(
@@ -54,8 +58,10 @@
 
 @media (max-width: 860px) {
   .hero-photo {
+    align-self: auto;
+    aspect-ratio: 16 / 11;
     min-height: 300px;
-    max-height: none;
+    margin-right: 0;
   }
 }
 
