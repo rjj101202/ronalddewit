@@ -308,6 +308,47 @@ section {
   font-size: 0.98rem;
 }
 
+/* ---------- Services intro (full first screen) ---------- */
+
+.services-intro {
+  /* Fill the first screen below the 74px sticky header */
+  min-height: calc(100vh - 74px);
+  min-height: calc(100svh - 74px);
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.scroll-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2.6rem;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--light-grey);
+}
+
+.scroll-hint .arrow {
+  font-size: 1rem;
+  animation: scroll-bob 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint .arrow {
+    animation: none;
+  }
+}
+
 /* ---------- Services (stacked, alternating) ---------- */
 
 .services-list {
@@ -330,7 +371,7 @@ section {
   aspect-ratio: 4 / 3;
   width: 100%;
   border-radius: 4px;
-  margin-bottom: 24px;
+  margin-top: 22px; /* photo sits below the title now */
 }
 
 .service-media .num {
@@ -338,7 +379,7 @@ section {
   font-size: 2.2rem;
   color: var(--line);
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   font-weight: 700;
   line-height: 1;
 }
