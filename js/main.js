@@ -50,3 +50,57 @@
     io.observe(el);
   });
 })();
+
+// Contact form submission via Web3Forms (AJAX, with inline feedback)
+(function () {
+  var form = document.getElementById("contact-form");
+  if (!form) return;
+  var status = document.getElementById("form-status");
+
+  form.addEventListener("submit", function (e) {
+    // While editing the page (content.js edit mode), never actually send
+    if (document.body.classList.contains("rdw-editing")) return;
+    e.preventDefault();
+
+    if (status) {
+      status.textContent = "Bezig met verzenden…";
+      status.className = "form-status is-sending";
+    }
+
+    fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { Accept: "application/json" },
+    })
+      .then(function (r) {
+        return r.json().then(function (data) {
+          return { ok: r.ok, data: data };
+        });
+      })
+      .then(function (res) {
+        if (res.ok && res.data.success) {
+          form.reset();
+          if (status) {
+            status.textContent =
+              "Bedankt voor je bericht! Het is verzonden en er wordt zo snel mogelijk gereageerd.";
+            status.className = "form-status is-success";
+          }
+        } else {
+          if (status) {
+            status.textContent =
+              "Het bericht kon niet worden verzonden" +
+              (res.data && res.data.message ? " (" + res.data.message + ")" : "") +
+              ". Probeer het later opnieuw of mail rechtstreeks.";
+            status.className = "form-status is-error";
+          }
+        }
+      })
+      .catch(function () {
+        if (status) {
+          status.textContent =
+            "Het bericht kon niet worden verzonden. Controleer je internetverbinding en probeer het opnieuw.";
+          status.className = "form-status is-error";
+        }
+      });
+  });
+})();

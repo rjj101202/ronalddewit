@@ -24,6 +24,7 @@
       <ul class="nav-links">
         <li><a href="/services">Services</a></li>
         <li><a href="/about">About</a></li>
+        <li><a href="/press">Press</a></li>
         <li><a href="/contact" class="cta">Contact</a></li>
       </ul>
     </div>
@@ -40,7 +41,14 @@
 
     <section style="padding-top:20px;">
       <div class="container split" style="align-items:start;">
-        <form class="form" action="https://formspree.io/f/your-form-id" method="POST">
+        <form class="form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+          <!-- Web3Forms delivery settings -->
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+          <input type="hidden" name="subject" value="Nieuw bericht via ronalddewit.nl" />
+          <input type="hidden" name="from_name" value="Ronald de Wit — website" />
+          <!-- Honeypot spam trap (bots fill this; humans never see it) -->
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
+
           <div class="form-row">
             <div class="field">
               <label for="name" data-edit-text="contact-label-name">Name</label>
@@ -53,7 +61,7 @@
           </div>
           <div class="field">
             <label for="subject" data-edit-text="contact-label-subject">Subject</label>
-            <input type="text" id="subject" name="subject" />
+            <input type="text" id="subject" name="Subject" />
           </div>
           <div class="field">
             <label for="message" data-edit-text="contact-label-message">Message</label>
@@ -62,6 +70,7 @@
           <div>
             <button type="submit" class="btn btn-primary"><span data-edit-text="contact-submit">Send message</span> <span class="arrow">&rarr;</span></button>
           </div>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
 
         <div>
@@ -107,6 +116,7 @@
       <ul class="footer-links">
         <li><a href="/services">Services</a></li>
         <li><a href="/about">About</a></li>
+        <li><a href="/press">Press</a></li>
         <li><a href="/contact">Contact</a></li>
       </ul>
       <p class="footer-copy" data-edit-text="footer-copy">Ronald de Wit Consulting — All Rights Reserved &copy;</p>
