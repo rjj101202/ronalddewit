@@ -10,11 +10,11 @@ static host.
 
 ```
 .
-├── index.html          # Home
+├── home.html           # Home (served at /home; / redirects here)
 ├── about.html          # About me
 ├── services.html       # Services
-├── insights.html       # Insights / articles
-├── contact.html        # Contact + form
+├── press.html          # Press / media references
+├── contact-us.html     # Contact + form (served at /contact-us)
 ├── css/style.css       # All styling (black & white minimalist theme)
 ├── js/main.js          # Mobile menu toggle
 ├── assets/             # Logo & favicon (SVG)
@@ -89,12 +89,12 @@ been added (or while you are in edit mode).
 ## Things you may want to update
 
 - **Links to my work** — the Wikipedia, Google Scholar, LinkedIn and Academy of
-  Europe URLs in `index.html` / `about.html` are placeholders; point them at the
+  Europe URLs in `home.html` / `about.html` are placeholders; point them at the
   real profiles.
-- **Contact form** — the form in `contact.html` posts to a placeholder
+- **Contact form** — the form in `contact-us.html` posts to a placeholder
   [Formspree](https://formspree.io/) endpoint (`your-form-id`). Replace it with your
   own form endpoint, or wire up another handler.
-- **Email / location** — update the contact details in `contact.html`.
+- **Email / location** — update the contact details in `contact-us.html`.
 - **Insights articles** — the article list in `insights.html` uses placeholder
   titles and lorem-ipsum text; replace with real content.
 - **Logo** — `assets/logo.svg` is a simple wordmark placeholder; swap in the real
